@@ -7,4 +7,10 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'mini-angular-ecom';
+  
+  isCartOpen: boolean = false;
+
+  toggleCart(): void {
+    this.isCartOpen = !this.isCartOpen;
+  }
 }

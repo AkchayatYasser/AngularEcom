@@ -1,0 +1,31 @@
+<div class="flex flex-col items-center justify-center">
+
+    <input type="text" [(ngModel)]="searchQuery" (keyup)="applyFilter()" class="mt-4 mb-4 p-2 rounded-md border border-gray-300 focus:outline-none focus:border-blue-500" placeholder="Search products...">
+    
+    <div class="grid grid-cols-2 gap-4 mt-7 md:grid-cols-3 lg:grid-cols-4">
+        <div *ngFor="let product of filteredProducts" class="mx-auto w-80 transform overflow-hidden rounded-lg bg-red-800 shadow-lg duration-300 hover:scale-105 hover:shadow-xl">
+            <img [src]="product.image" class="h-48 w-full object-cover object-center" [alt]="product.title">
+            <div class="p-2 flex flex-col">
+                <div>
+                    <h5 class="mb-2 text-lg font-medium cursor-pointer dark:text-white text-white" (click)="toggleProductDetails(product)">{{ product.title }}</h5>
+                    <p class="mr-2 text-lg font-semibold text-gray-300">Price: ${{ product.price }}</p>
+                </div>
+                
+                <button (click)="addToCart(product)" class="m-2 text-white bg-gray-800 hover:bg-gray-900 focus:outline-none focus:ring-4 focus:ring-gray-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 dark:bg-gray-800 dark:hover:bg-gray-700 dark:focus:ring-gray-700 dark:border-gray-700">Add to Cart</button>
+            </div>
+        </div>
+    </div>
+    
+    <div *ngIf="selectedProduct" class="product-details-overlay">
+        <div class="product-details-modal">
+            <div class="product-details-content bg-white p-8 rounded-lg">
+                <img [src]="selectedProduct.image" [alt]="selectedProduct.title" class="h-28 w-fit object-cover object-center mb-4">
+                <h2 class="font-bold">{{ selectedProduct.title }}</h2>
+                <p>{{ selectedProduct.description }}</p>
+                <p class="font-semibold text-gray-600">Price: ${{ selectedProduct.price }}</p>
+                <button (click)="toggleProductDetails(null)" class="text-white bg-gray-800 hover:bg-gray-900 focus:outline-none focus:ring-4 focus:ring-gray-300 font-medium rounded-lg text-sm px-5 py-2.5 mt-4">Close</button>
+            </div>
+        </div>
+    </div>
+    
+</div>
